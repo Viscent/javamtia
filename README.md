@@ -2,6 +2,13 @@
 # 豆瓣主页
 https://book.douban.com/subject/27034721/
 # 购买链接
+京东：https://item.jd.com/12184434.html
+
+亚马逊： https://www.amazon.cn/dp/B071RV8NLW
+
+互动出版网： http://product.china-pub.com/5661167
+
+当当： http://product.dangdang.com/25069727.html
 
 # 试读下载
 （待补充）
