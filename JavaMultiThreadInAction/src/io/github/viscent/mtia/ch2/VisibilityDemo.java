@@ -18,7 +18,7 @@ public class VisibilityDemo {
 
   public static void main(String[] args) throws InterruptedException {
     TimeConsumingTask timeConsumingTask = new TimeConsumingTask();
-    Thread thread = new Thread(new TimeConsumingTask());
+    Thread thread = new Thread(timeConsumingTask);
     thread.start();
 
     // 指定的时间内任务没有执行结束的话，就将其取消
