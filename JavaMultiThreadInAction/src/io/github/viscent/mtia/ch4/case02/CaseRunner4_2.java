@@ -9,15 +9,12 @@
 本代码可以从以下网址下载：
 https://github.com/Viscent/javamtia
 http://www.broadview.com.cn/31065
-*/
+ */
 package io.github.viscent.mtia.ch4.case02;
 
 import io.github.viscent.mtia.util.AppWrapper;
 
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -27,22 +24,18 @@ import java.util.Enumeration;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
- *
- 参考命令如下。其中，JVM系统属性x.std.in的值需要根据实际情况修改，将其修改为每行包含一个接口日志文件名的文本文件。<BR>
+ * 运行程序前请先解压缩数据文件： src/data/ch4case02/InputFiles.zip。 <br>
+ * 参考命令如下。
  * java -Xms96m -Xmx128m -XX:NewSize=64m -XX:SurvivorRatio=32
- * -Dx.std.in="/tmp/in.dat"
- * -Dx.stat.task=io.github.viscent.mtia.ch4.case02.MultithreadedStatTask
- * -Dx.input.buffer=8192 -Dx.block.size=2000
- * io.github.viscent.mtia.ch4.case02.CaseRunner
+ * -Dx.stat.task=io.github.viscent.mtia.ch4.case02.MultithreadedStatTask -Dx.input.buffer=8192
+ * -Dx.block.size=2000 io.github.viscent.mtia.ch4.case02.CaseRunner4_2
  *
  * @author Viscent Huang
  */
 public class CaseRunner4_2 {
-  // 日志文件所在目录
-  private static final String LOG_BASE_DIR = "/home/viscent/tmp/tps/";
 
   public static void main(String[] args) throws Exception {
-    AppWrapper.invokeMain0(CaseRunner4_2.class, args, true);
+    AppWrapper.invokeMain0(CaseRunner4_2.class, args, false);
   }
 
   public static void main0(String[] args) throws Exception {
@@ -93,8 +86,10 @@ public class CaseRunner4_2 {
 
   private static InputStream createInputStream() {
     final AtomicBoolean readerClosed = new AtomicBoolean(false);
+    InputStream dataIn = CaseRunner4_2.class
+        .getResourceAsStream("/data/ch4case02/in.dat");
     final BufferedReader bfr = new BufferedReader(new InputStreamReader(
-        System.in)) {
+        dataIn)) {
       @Override
       public void close() throws IOException {
         super.close();
@@ -127,8 +122,9 @@ public class CaseRunner4_2 {
             InputStream in = null;
             if (null != fileName) {
               try {
-                in = new FileInputStream(new File(LOG_BASE_DIR + fileName));
-              } catch (FileNotFoundException e) {
+                in = CaseRunner4_2.class.getResourceAsStream("/data/ch4case02/"
+                    + fileName);
+              } catch (Exception e) {
                 e.printStackTrace();
               }
             }
