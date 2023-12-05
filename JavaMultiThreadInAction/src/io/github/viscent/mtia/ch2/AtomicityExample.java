@@ -10,9 +10,8 @@ public class AtomicityExample {
     }
 
     public void updateHostInfo2(String ip, int port) {
-        HostInfo hostInfo = new HostInfo();
-        hostInfo.setIp(ip);
-        hostInfo.setPort(port);
+        HostInfo hostInfo = new HostInfo(ip, port);
+        this.hostInfo = hostInfo;
     }
 
     public void connectToHost() {
@@ -30,6 +29,11 @@ public class AtomicityExample {
 
         private int port;
 
+        HostInfo(String ip, int port){
+          this.ip = ip;
+          this.port = port;
+        }
+        
         public String getIp() {
             return ip;
         }
